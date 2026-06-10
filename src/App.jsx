@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useGame } from './hooks/useGame'
 import { useBlockchain } from './hooks/useBlockchain'
 import Board from './components/Board'
@@ -5,8 +6,11 @@ import Header from './components/Header'
 import Overlay from './components/Overlay'
 import WalletConnect from './components/WalletConnect'
 import Leaderboard from './components/Leaderboard'
+import HomePage from './components/HomePage'
 
 export default function App() {
+  const [started, setStarted] = useState(false)
+
   const {
     grid,
     score,
@@ -23,8 +27,6 @@ export default function App() {
 
   const {
     account,
-    connect,
-    disconnect,
     saveScore,
     saving,
     txHash,
@@ -33,6 +35,10 @@ export default function App() {
     refreshLeaderboard,
     error,
   } = useBlockchain()
+
+  if (!started) {
+    return <HomePage onPlay={() => setStarted(true)} />
+  }
 
   const showOverlay = over || (won && !keepPlayingState)
 
@@ -67,8 +73,6 @@ export default function App() {
 
         <WalletConnect
           account={account}
-          onConnect={connect}
-          onDisconnect={disconnect}
           onSaveScore={saveScore}
           saving={saving}
           txHash={txHash}

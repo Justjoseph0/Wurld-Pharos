@@ -11,6 +11,8 @@
     "deploy": "hardhat run scripts/deploy.js --network pharos"
   },
   "dependencies": {
+    "@reown/appkit": "^1.8.20",
+    "@reown/appkit-adapter-ethers": "^1.8.20",
     "ethers": "^6.13.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
