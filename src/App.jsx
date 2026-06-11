@@ -9,7 +9,11 @@ import Leaderboard from './components/Leaderboard'
 import HomePage from './components/HomePage'
 
 export default function App() {
-  const [started, setStarted] = useState(false)
+  const isPWA =
+    window.matchMedia('(display-mode: standalone)').matches ||
+    new URLSearchParams(window.location.search).has('pwa')
+
+  const [started, setStarted] = useState(isPWA)
 
   const {
     grid,
